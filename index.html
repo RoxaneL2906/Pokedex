@@ -12,17 +12,25 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Margarine&display=swap"
+      rel="stylesheet"
+    />
     <script defer src="script.js"></script>
   </head>
 
   <body>
     <div id="list"></div>
     <div id="right-column">
-      <div id="search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input id="search-input" type="text" />
+      <div class="fixed-position">
+        <div id="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="search-input" type="text" />
+        </div>
+        <div id="detail"></div>
       </div>
-      <div id="detail"></div>
       <div id="evolution"></div>
     </div>
   </body>

@@ -34,17 +34,43 @@ function showList(filtered_pokemons) {
   });
 }
 
-// keyup -> L'évènement keyup se déclenche lorsque qu'une touche du clavier qui a été pressée est relâchée
-// Filtre la liste de pokémon suivant le nom
-// toLowerCase -> Ignore les majuscules
 function initSearch() {
   const input = document.getElementById("search-input");
+  // keyup -> L'évènement keyup se déclenche lorsque qu'une touche du clavier qui a été pressée est relâchée
+  // toLowerCase -> Ignore les majuscules
   input.addEventListener("keyup", function () {
-    const searchedPokemons = pokemons.filter(function (pokemon) {
-      return pokemon.name.toLowerCase().includes(input.value.toLowerCase());
-    });
+    const searchValue = input.value.toLowerCase();
+
+    // Si la barre de recherche est vide, on réinitialise l'affichage
+    if (searchValue == "") {
+      // Efface les détails et l'évolution
+      document.getElementById("detail").innerHTML = "";
+      document.getElementById("evolution").innerHTML = "";
+      // Réaffiche la liste complète des pokémons
+      showList(pokemons);
+      return;
+    }
+
+    // Vérifier si la recherche est un numéro
+    const isNumber = !isNaN(searchValue) && searchValue.trim() != "";
+
+    let searchedPokemons;
+
+    if (isNumber) {
+      // Recherche par numéro (pokedexId)
+      searchedPokemons = pokemons.filter(function (pokemon) {
+        return pokemon.pokedexId == parseInt(searchValue);
+      });
+    } else {
+      // Recherche par nom
+      searchedPokemons = pokemons.filter(function (pokemon) {
+        return pokemon.name.toLowerCase().includes(searchValue);
+      });
+    }
+
     showList(searchedPokemons);
-    // Affiche les détails du pokémon si la recherche est égale à 1 élément trouvé
+
+    // Si un seul pokémon est trouvé, afficher ses détails
     if (searchedPokemons.length == 1) {
       showDetails(searchedPokemons[0].pokedexId);
     }
@@ -62,7 +88,7 @@ function showDetails(pokemonId) {
     <p class="number">n°${pokemon.pokedexId}</p>
     <img class="picture" src="${pokemon.image}">
     <p class="name">${pokemon.name}</p>
-    <p>Types</p>
+    <p>Type${pokemon.apiTypes.length > 1 ? "s" : ""}</p>
     <div id="types"></div>
     `;
 

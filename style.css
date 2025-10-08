@@ -1,11 +1,15 @@
 body {
-  background-color: red;
+  background-color: #ef3e3e;
   display: flex;
   flex-direction: row;
   height: 100vh;
   overflow: hidden;
   gap: 3rem;
   color: white;
+  font-family: "Happy Monkey", system-ui;
+  font-size: 20px;
+  margin: 0;
+  padding: 1rem;
 }
 
 #list {
@@ -17,7 +21,7 @@ body {
 }
 
 .pokemon {
-  background-color: darkslategrey;
+  background-color: #292929;
   height: 4rem;
   padding: 0.5rem;
   display: flex;
@@ -33,6 +37,18 @@ body {
 
 #right-column {
   flex: 1;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 100vh;
+}
+
+.fixed-position {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 #search {
@@ -43,7 +59,8 @@ body {
 }
 
 #search-input {
-  background-color: rgba(128, 128, 128, 0.5);
+  background-color: rgba(182, 47, 47, 0.7);
+  border-radius: 30px;
   color: white;
   border: none;
   font-size: 1.5rem;
@@ -60,6 +77,16 @@ body {
   height: 300px;
 }
 
+.name {
+  font-size: 40px;
+  margin-top: 0;
+}
+
 .type {
   height: 4rem;
+}
+
+#show-evol {
+  display: flex;
+  justify-content: space-between;
 }
