@@ -18,7 +18,7 @@ function showList(filtered_pokemons) {
     // data_id -> cf cours Massi
     list.innerHTML += `
       <div class='pokemon' data-id='${pokemon.pokedexId}'>
-            <p>${pokemon.pokedexId}</p>
+            <p>${pokemon.pokedexId}.</p>
             <p>${pokemon.name}</p>
             <img src="${pokemon.image}">
         </div>`;
@@ -87,7 +87,7 @@ function showDetails(pokemonId) {
   detail.innerHTML = `
     <p class="number">n°${pokemon.pokedexId}</p>
     <img class="picture" src="${pokemon.image}">
-    <p class="name">${pokemon.name}</p>
+    <h1 class="name">${pokemon.name}</h1>
     <p>Type${pokemon.apiTypes.length > 1 ? "s" : ""}</p>
     <div id="types"></div>
     `;
@@ -97,11 +97,13 @@ function showDetails(pokemonId) {
     types.innerHTML += `<img class="type" src="${type.image}">`;
   });
 
-  const evolution = document.getElementById("evolution");
-  // Si le pokemon sélectionné à une évolution...
-  if (pokemon.apiEvolutions.length > 0) {
+  const evolutionDiv = document.getElementById("evolution");
+
+  let evolutionCount = 0;
+  evolutionDiv.innerHTML = "";
+  pokemon.apiEvolutions.forEach((evolution) => {
     // .. On recherche le pokémon dans le tableau
-    const evolutionId = pokemon.apiEvolutions[0].pokedexId;
+    const evolutionId = evolution.pokedexId;
     const pokemonEvolution = pokemons.find(function (pokemon) {
       return pokemon.pokedexId == evolutionId;
     });
@@ -109,27 +111,28 @@ function showDetails(pokemonId) {
     // SI on trouve une évolution dans notre tableau -> Affiche le cadre d'évolution en bas
     // Condition créée car on ne récupère que les 151 premiers pokémons (ex: Leveinard a une évolution mais pas dans les 151 premiers -> Evite erreur dans la console)
     if (pokemonEvolution) {
-      evolution.innerHTML = `
-            <p>Evolution</p>
-            <div id="show-evol" class='pokemon' data-id='${pokemonEvolution.pokedexId}'>
-                <p>${pokemonEvolution.pokedexId}</p>
-                <p>${pokemonEvolution.name}<p>
-                <img src="${pokemonEvolution.image}">
-            </div>`;
+      if (evolutionCount == 0) {
+        evolutionDiv.innerHTML = `<p>Evolution${
+          pokemon.apiEvolutions.length > 1 ? "s" : ""
+        }</p>`;
+      }
 
-      const showEvol = document.getElementById("show-evol");
-      showEvol.addEventListener("click", function () {
+      var pokemonDiv = document.createElement("div");
+      pokemonDiv.id = `show-evol-${evolutionId}`;
+      pokemonDiv.className = "pokemon";
+      pokemonDiv.innerHTML = `
+        <p>${pokemonEvolution.pokedexId}.</p>
+        <p>${pokemonEvolution.name}<p>
+        <img src="${pokemonEvolution.image}">`;
+
+      evolutionDiv.appendChild(pokemonDiv);
+
+      pokemonDiv.addEventListener("click", function () {
         showDetails(evolutionId);
       });
-      // Si on ne trouve pas le pokémon dans le tableau (ex : Lephorie)
-    } else {
-      evolution.innerHTML = "";
+      evolutionCount++;
     }
-
-    // S'il n'y a pas d'évolution tout court (ex : Florizarre)
-  } else {
-    evolution.innerHTML = "";
-  }
+  });
 }
 
 // On appelle les fonctions une fois que le code a été lu

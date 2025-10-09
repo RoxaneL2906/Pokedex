@@ -12,6 +12,10 @@ body {
   padding: 1rem;
 }
 
+p {
+  margin: 0;
+}
+
 #list {
   width: 33%;
   overflow: auto;
@@ -22,13 +26,18 @@ body {
 
 .pokemon {
   background-color: #292929;
-  height: 4rem;
+  height: 3.5rem;
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  gap: 1rem;
+}
+
+.pokemon p:nth-child(2) {
+  flex: 1;
 }
 
 .pokemon img {
@@ -37,11 +46,10 @@ body {
 
 #right-column {
   flex: 1;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   max-height: 100vh;
 }
 
@@ -56,6 +64,7 @@ body {
   gap: 0.8rem;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
 #search-input {
@@ -74,19 +83,16 @@ body {
 }
 
 .picture {
-  height: 300px;
-}
-
-.name {
-  font-size: 40px;
-  margin-top: 0;
+  height: 250px;
 }
 
 .type {
-  height: 4rem;
+  height: 3rem;
 }
 
-#show-evol {
+#evolution {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
