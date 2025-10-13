@@ -117,7 +117,7 @@ function showDetails(pokemonId) {
         }</p>`;
       }
 
-      var pokemonDiv = document.createElement("div");
+      let pokemonDiv = document.createElement("div");
       pokemonDiv.id = `show-evol-${evolutionId}`;
       pokemonDiv.className = "pokemon";
       pokemonDiv.innerHTML = `
