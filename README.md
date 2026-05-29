@@ -2,6 +2,8 @@
 
 Application web de consultation des Pokémons via l'API PokeBuild.
 
+> ⚠️ **API indisponible** : Ce projet utilise `pokebuildapi.fr` qui est actuellement hors service. L'application s'affiche mais les Pokémons ne se chargent pas.
+
 ## Programme
 JavaScript - Fetch API
 
